@@ -1,0 +1,112 @@
+Installation process:
+
+
+1. Create the project structure
+
+my-project/
+├── frontend/    # React + TypeScript + Tailwind
+└── backend/     # Express + TypeScript + MySQL
+
+Frontend:
+
+2. Frontend setup — React + TypeScript + Tailwind
+
+Create a React project using Vite:
+
+bash
+npm create vite@latest frontend -- --template react-ts
+cd frontend
+npm install
+Install Tailwind CSS:
+
+bash
+npm install tailwindcss @tailwindcss/vite
+
+
+Open vite.config.ts and configure the Tailwind plugin:
+
+typescript
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+})
+Add this to src/index.css:
+
+css
+@import "tailwindcss";
+Start the frontend:
+
+bash
+npm run dev
+Open the local URL shown in your terminal, usually http://localhost:5173.
+
+
+
+Backend:
+
+Backend setup — Express + TypeScript
+Open a new terminal in your project root:
+
+bash
+mkdir backend
+cd backend
+npm init -y
+Install the packages:
+
+bash
+npm install express mysql2 cors dotenv
+npm install -D typescript tsx @types/node @types/express @types/cors
+Initialize TypeScript:
+
+bash
+npx tsc --init
+
+Create this structure:
+
+backend/
+├── src/
+│   └── server.ts
+├── .env
+├── package.json
+└── tsconfig.json
+
+
+
+
+Check versions:
+npm list express typescript
+
+
+---------------------------------------------------------------------------------------------------------
+
+Add users secure validation:
+
+express — API server.
+mysql2 — MySQL connection and parameterized queries.
+argon2 — secure password hashing.
+zod — server-side input validation.
+helmet — security-related HTTP headers.
+
+2. Set up your Express + TypeScript backend
+Install packages
+Inside your backend project:
+
+bash
+npm install express mysql2 argon2 zod dotenv helmet cors express-rate-limit
+npm install -D typescript tsx @types/express @types/cors @types/node
+
+-------------------------------------------------------------------------------------------------------
+
+Server validation:
+npm install zod
+
+Fix CORS in your backend
+The solution depends on which backend framework you're using. If you're using Node.js with Express, follow this fix.
+Install CORS:
+Run this in your backend project directory:
+
+npm install cors
+npm install -D @types/cors
