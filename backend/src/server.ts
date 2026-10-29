@@ -1,3 +1,13 @@
+import 'dotenv/config'
+import app from './app'
+
+const PORT = Number(process.env.PORT ?? 5000)
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
+})
+
+
 // import express from 'express'
 // import cors from 'cors'
 // import mysql from 'mysql2/promise'
@@ -38,11 +48,3 @@
 
 
 
-import 'dotenv/config'
-import app from './app'
-
-const PORT = Number(process.env.PORT ?? 4000)
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-})

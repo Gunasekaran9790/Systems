@@ -110,3 +110,49 @@ Run this in your backend project directory:
 
 npm install cors
 npm install -D @types/cors
+
+---------------------------------------------------------------------------------------------------------------------
+Login page process:
+
+npm install express-session express-rate-limit
+npm install -D @types/express-session
+We'll use:
+
+argon2 — already installed from signup, to verify passwords.
+
+express-session — maintain the logged-in user's session on the server. 
+
+GitHub
++1
+
+express-rate-limit — limit repeated login attempts.
+
+
+How to use it
+Run this command in your terminal:
+
+bash
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+Example output (yours will be different):
+
+text
+a8f31c92d7e640b5f12a9c83e4d6710b5f9a2c8d6e1037b4a5f8c2d91e6073ab
+--------------------------------------------------------------------------------------------------------------------
+
+Frontend:
+
+Install React Router if you haven't already:
+
+bash
+npm install react-router-dom
+
+-----------------------------------------------------------------------------------------------------------------------
+Frontend:
+Icons:
+npm install lucide-react
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+
+
