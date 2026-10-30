@@ -38,9 +38,9 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
           <Menu size={22} />
         </button>
 
-        <h1 className="text-lg font-semibold text-slate-800">
+        {/* <h1 className="text-lg font-semibold text-slate-800">
           Admin Dashboard
-        </h1>
+        </h1> */}
       </div>
 
       <div className="flex items-center gap-2 sm:gap-4">

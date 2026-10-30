@@ -2,6 +2,7 @@ import express from 'express';
 import apiRoutes from './routes';
 import session from 'express-session'
 import cors from 'cors';
+import customerRoutes from './routes/customerRoutes';
 
 const app = express();
 
@@ -36,6 +37,8 @@ app.use(express.json({ limit: '10kb' }));
 
 // 3. Register API routes
 app.use('/api/v1/auth', apiRoutes);
+
+app.use('/api/v1/customers', customerRoutes);
 
 // Health check
 // app.get('/api/health', (_req, res) => {

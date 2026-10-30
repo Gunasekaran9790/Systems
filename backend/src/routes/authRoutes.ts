@@ -1,11 +1,13 @@
 import { Router } from 'express'
 import { signup } from '../controllers/authController'
 import { login } from '../controllers/loginController'
+import { logout } from '../controllers/logoutController'
 import { validate } from '../middleware/validateMiddleware'
 import { signupSchema } from '../validators/authValidation'
 import { loginSchema } from '../validators/loginValidation'
 import { rateLimit } from 'express-rate-limit'
 import { getCurrentUser } from '../controllers/sessionController'
+
 
 const router = Router()
 
@@ -36,26 +38,28 @@ router.get("/me", (req, res) => {
   });
 });
 
-router.post("/logout", (req, res, next) => {
-  if (!req.session) {
-    return res.sendStatus(204);
-  }
+router.post('/logout', logout);
 
-  req.session.destroy((err) => {
-    if (err) {
-      return next(err);
-    }
+// router.post("/logout", (req, res, next) => {
+//   if (!req.session) {
+//     return res.sendStatus(204);
+//   }
 
-    res.clearCookie("connect.sid", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
-    });
+//   req.session.destroy((err) => {
+//     if (err) {
+//       return next(err);
+//     }
 
-    return res.sendStatus(204);
-  });
-});  
+//     res.clearCookie("connect.sid", {
+//       httpOnly: true,
+//       secure: process.env.NODE_ENV === "production",
+//       sameSite: "lax",
+//       path: "/",
+//     });
+
+//     return res.sendStatus(204);
+//   });
+// });  
 
 
 
