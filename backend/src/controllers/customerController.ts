@@ -76,13 +76,27 @@ export async function createCustomer(
     });
 
     return res.status(201).json({
+      success: true,
       message: 'Customer created successfully.',
     });
+
   } catch (error) {
     console.error('Create customer error:', error);
 
+    const err = error as Error;
+
+    if (
+      err.message.includes('Customer Code already exists')
+    ) {
+      return res.status(409).json({
+        success: false,
+        message: err.message,
+      });
+    }
+
     return res.status(500).json({
-      message: 'Failed to create customer.',
+      success: false,
+      message: err.message || 'Failed to create customer.',
     });
   }
 }
@@ -110,6 +124,7 @@ export async function getCustomerById(
   }
 }
 
+
 export async function updateCustomer(
   req: Request,
   res: Response,
@@ -119,6 +134,7 @@ export async function updateCustomer(
 
     if (!existing) {
       return res.status(404).json({
+        success: false,
         message: 'Customer not found.',
       });
     }
@@ -151,6 +167,7 @@ export async function updateCustomer(
       !['ACTIVE', 'INACTIVE'].includes(status)
     ) {
       return res.status(400).json({
+        success: false,
         message: 'Valid customer code, name and status are required.',
       });
     }
@@ -176,15 +193,31 @@ export async function updateCustomer(
     });
 
     return res.status(200).json({
+      success: true,
       message: 'Customer updated successfully.',
     });
+
   } catch (error) {
-    console.error(error);
+    console.error('Update customer error:', error);
+
+    const err = error as Error;
+
+    if (
+      err.message?.includes('Customer Code already exists')
+    ) {
+      return res.status(409).json({
+        success: false,
+        message: err.message,
+      });
+    }
+
     return res.status(500).json({
-      message: 'Failed to update customer.',
+      success: false,
+      message: err.message || 'Failed to update customer.',
     });
   }
 }
+
 
 export async function updateCustomerStatus(
   req: Request,

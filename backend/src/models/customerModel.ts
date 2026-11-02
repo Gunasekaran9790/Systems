@@ -9,6 +9,32 @@ export async function getAllCustomers() {
   return rows;
 }
 
+// Check whether Customer Code already exists
+async function checkCustomerCodeExists(
+  customerCode: string,
+  excludeId?: string
+): Promise<boolean> {
+  let sql = `
+    SELECT id
+    FROM customers
+    WHERE customer_code = ?
+  `;
+
+  const params: (string | number)[] = [customerCode];
+
+  // Exclude current customer while editing
+  if (excludeId) {
+    sql += ' AND id != ?';
+    params.push(excludeId);
+  }
+
+  sql += ' LIMIT 1';
+
+  const [rows] = await db.execute(sql, params);
+
+  return (rows as any[]).length > 0;
+}
+
 export async function createCustomer(data: {
   customer_code: string;
   name: string;
@@ -28,37 +54,59 @@ export async function createCustomer(data: {
   opening_balance?: number;
   status?: 'ACTIVE' | 'INACTIVE';
 }) {
-  const [result] = await db.execute(
-    `INSERT INTO customers (
-      customer_code, name, company_name, phone_1, phone_2,
-      email, address_line_1, address_line_2, city, state,
-      zipcode, country, tax_number, tax_number_type,
-      credit_limit, opening_balance, status
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    [
-      data.customer_code,
-      data.name,
-      data.company_name ?? null,
-      data.phone_1 ?? null,
-      data.phone_2 ?? null,
-      data.email ?? null,
-      data.address_line_1 ?? null,
-      data.address_line_2 ?? null,
-      data.city ?? null,
-      data.state ?? null,
-      data.zipcode ?? null,
-      data.country ?? null,
-      data.tax_number ?? null,
-      data.tax_number_type ?? null,
-      data.credit_limit ?? 0,
-      data.opening_balance ?? 0,
-      data.status ?? 'ACTIVE',
-    ]
-  );
+  const customerCode = data.customer_code.trim();
 
-  return result;
+  try {
+    const exists = await checkCustomerCodeExists(customerCode);
+
+    if (exists) {
+      throw new Error(
+        'Customer Code already exists. Please enter a different Customer Code.'
+      );
+    }
+
+    const [result] = await db.execute(
+      `INSERT INTO customers (
+        customer_code, name, company_name, phone_1, phone_2,
+        email, address_line_1, address_line_2, city, state,
+        zipcode, country, tax_number, tax_number_type,
+        credit_limit, opening_balance, status
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        customerCode,
+        data.name,
+        data.company_name ?? null,
+        data.phone_1 ?? null,
+        data.phone_2 ?? null,
+        data.email ?? null,
+        data.address_line_1 ?? null,
+        data.address_line_2 ?? null,
+        data.city ?? null,
+        data.state ?? null,
+        data.zipcode ?? null,
+        data.country ?? null,
+        data.tax_number ?? null,
+        data.tax_number_type ?? null,
+        data.credit_limit ?? 0,
+        data.opening_balance ?? 0,
+        data.status ?? 'ACTIVE',
+      ]
+    );
+
+    return result;
+
+  } catch (err) {
+    const error = err as { code?: string; message?: string };
+
+    if (error.code === 'ER_DUP_ENTRY') {
+      throw new Error(
+        'Customer Code already exists. Please enter a different Customer Code.'
+      );
+    }
+
+    throw err;
+  }
 }
-
 
 export async function getCustomerById(id: string) {
   const [rows] = await db.execute(
@@ -69,50 +117,75 @@ export async function getCustomerById(id: string) {
   return (rows as any[])[0] || null;
 }
 
+// Update Customer
 export async function updateCustomer(id: string, data: any) {
-  const [result] = await db.execute(
-    `UPDATE customers SET
-      customer_code = ?,
-      name = ?,
-      company_name = ?,
-      phone_1 = ?,
-      phone_2 = ?,
-      email = ?,
-      address_line_1 = ?,
-      address_line_2 = ?,
-      city = ?,
-      state = ?,
-      zipcode = ?,
-      country = ?,
-      tax_number = ?,
-      tax_number_type = ?,
-      credit_limit = ?,
-      opening_balance = ?,
-      status = ?
-    WHERE id = ?`,
-    [
-      data.customer_code,
-      data.name,
-      data.company_name || null,
-      data.phone_1 || null,
-      data.phone_2 || null,
-      data.email || null,
-      data.address_line_1 || null,
-      data.address_line_2 || null,
-      data.city || null,
-      data.state || null,
-      data.zipcode || null,
-      data.country || null,
-      data.tax_number || null,
-      data.tax_number_type || null,
-      data.credit_limit ?? 0,
-      data.opening_balance ?? 0,
-      data.status,
-      id,
-    ]
-  );
+  const customerCode = String(data.customer_code ?? '').trim();
 
-  return result;
+  try {
+    // Check duplicate Customer Code, excluding current customer
+    const exists = await checkCustomerCodeExists(customerCode, id);
+
+    if (exists) {
+      throw new Error(
+        'Customer Code already exists. Please enter a different Customer Code.'
+      );
+    }
+
+    const [result] = await db.execute(
+      `UPDATE customers SET
+        customer_code = ?,
+        name = ?,
+        company_name = ?,
+        phone_1 = ?,
+        phone_2 = ?,
+        email = ?,
+        address_line_1 = ?,
+        address_line_2 = ?,
+        city = ?,
+        state = ?,
+        zipcode = ?,
+        country = ?,
+        tax_number = ?,
+        tax_number_type = ?,
+        credit_limit = ?,
+        opening_balance = ?,
+        status = ?
+      WHERE id = ?`,
+      [
+        customerCode,
+        data.name,
+        data.company_name || null,
+        data.phone_1 || null,
+        data.phone_2 || null,
+        data.email || null,
+        data.address_line_1 || null,
+        data.address_line_2 || null,
+        data.city || null,
+        data.state || null,
+        data.zipcode || null,
+        data.country || null,
+        data.tax_number || null,
+        data.tax_number_type || null,
+        data.credit_limit ?? 0,
+        data.opening_balance ?? 0,
+        data.status,
+        id,
+      ]
+    );
+
+    return result;
+
+  } catch (err) {
+    const error = err as { code?: string; message?: string };
+
+    if (error.code === 'ER_DUP_ENTRY') {
+      throw new Error(
+        'Customer Code already exists. Please enter a different Customer Code.'
+      );
+    }
+
+    throw err;
+  }
 }
 
 export async function updateCustomerStatus(

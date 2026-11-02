@@ -16,7 +16,7 @@ export default function DashboardLayout() {
       <div className="min-h-screen md:pl-64">
         <Navbar onMenuClick={() => setMobileOpen(true)} />
 
-        <main className="p-4 sm:p-6 lg:p-8">
+        <main className="p-4 sm:p-4 lg:p-6">
           <Outlet />
         </main>
       </div>

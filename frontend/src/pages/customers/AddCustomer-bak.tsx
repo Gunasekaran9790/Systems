@@ -128,7 +128,7 @@ export default function AddCustomer() {
 
       <form
         onSubmit={handleSubmit}
-        className="space-y-6 rounded-lg border bg-white p-6"
+        className="space-y-6 rounded-lg bg-white p-6 border-b border-gray-200 px-6 py-4 dark:border-gray-800"
       >
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           {fields.map((field) => (

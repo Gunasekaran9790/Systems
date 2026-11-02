@@ -30,9 +30,11 @@ import Dashboard from "./pages/Dashboard";
 import Users from "./pages/users/AllUsers";
 import Login from "./pages/auth/SignIn";
 import CustomersList from './pages/customers/AllCustomers';
-import AddCustomer from './pages/customers/AddCustomer';
+//import AddCustomer from './pages/customers/AddCustomer-bak';
 import ViewCustomer from './pages/customers/ViewCustomer'
-import EditCustomer from "./pages/customers/EditCustomer";
+//import EditCustomer from "./pages/customers/EditCustomer-bak";
+
+import CustomerForm from './pages/customers/CustomerForm';
 
 function App() {
   return (
@@ -46,9 +48,12 @@ function App() {
             <Route path="/users" element={<Users />} />
 
             <Route path="/customers" element={<CustomersList />} />
-            <Route path="/customers/add" element={<AddCustomer />} />
+            {/* <Route path="/customers/add" element={<AddCustomer />} /> */}
             <Route path="/customers/view/:id" element={<ViewCustomer />} />
-            <Route path="/customers/edit/:id" element={<EditCustomer />} />
+            {/* <Route path="/customers/edit/:id" element={<EditCustomer />} /> */}
+
+<Route path="/customers/add" element={<CustomerForm />} />
+<Route path="/customers/edit/:id" element={<CustomerForm />} />
 
           </Route>
         </Route>
