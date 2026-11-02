@@ -36,6 +36,10 @@ import ViewCustomer from './pages/customers/ViewCustomer'
 
 import CustomerForm from './pages/customers/CustomerForm';
 
+import ProductsList from './pages/products/ProductsList';
+import ProductForm from './pages/products/ProductForm';
+import ViewProduct from './pages/products/ViewProduct';
+
 function App() {
   return (
     <BrowserRouter>
@@ -51,9 +55,13 @@ function App() {
             {/* <Route path="/customers/add" element={<AddCustomer />} /> */}
             <Route path="/customers/view/:id" element={<ViewCustomer />} />
             {/* <Route path="/customers/edit/:id" element={<EditCustomer />} /> */}
+            <Route path="/customers/add" element={<CustomerForm />} />
+            <Route path="/customers/edit/:id" element={<CustomerForm />} />
 
-<Route path="/customers/add" element={<CustomerForm />} />
-<Route path="/customers/edit/:id" element={<CustomerForm />} />
+            <Route path="/products" element={<ProductsList />} />
+            <Route path="/products/add" element={<ProductForm />} />
+            <Route path="/products/edit/:id" element={<ProductForm />} />
+            <Route path="/products/view/:id" element={<ViewProduct />} />
 
           </Route>
         </Route>

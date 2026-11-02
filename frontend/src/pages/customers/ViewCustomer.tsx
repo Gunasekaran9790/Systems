@@ -46,9 +46,9 @@ export default function ViewCustomer() {
   ];
 
   return (
-    <div className="mx-auto max-w-5xl p-6">
-      <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">Customer Details</h1>
+    <div className="mx-auto--max-w-5xl--p-6">
+      <div className="text-left mb-6 flex items-center justify-between">
+        <h2 className="text-xl font-semibold">Customer Details</h2>
 
         <div className="flex gap-3">
           <Link
@@ -67,12 +67,12 @@ export default function ViewCustomer() {
         </div>
       </div>
 
-      <div className="rounded-lg border bg-white p-6">
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+      <div className="border-gray-200 rounded-lg border bg-white p-6">
+        <div className="text-left grid grid-cols-1 gap-5 md:grid-cols-2">
           {details.map(([label, value]) => (
             <div key={label}>
-              <p className="text-sm text-gray-500">{label}</p>
-              <p className="mt-1 font-medium">
+              <p className="text-sm text-gray-500 font-medium">{label} : </p>
+              <p className="mt-1 whitespace-pre-wrap text-[14px]">
                 {value ?? '-'}
               </p>
             </div>

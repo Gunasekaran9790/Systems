@@ -111,7 +111,7 @@ export default function Sidebar({
           ${mobileOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
         {/* Header */}
-        <div className="flex h-16 items-center justify-between border-b px-5">
+        <div className="flex h-16 items-center justify-between border-b border-gray-200 px-5">
           <span className="text-xl font-bold text-indigo-600">
             Admin Portal
           </span>
@@ -192,7 +192,7 @@ export default function Sidebar({
         </nav>
 
         {/* Footer */}
-        <div className="border-t p-4 text-xs text-slate-500">
+        <div className="border-t border-gray-200 p-4 text-xs text-slate-500">
           Admin Dashboard
         </div>
       </aside>
