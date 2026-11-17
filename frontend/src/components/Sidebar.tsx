@@ -10,6 +10,7 @@ import {
   ChevronDown,
   UserPlus,
   List,
+  Building2,
 } from "lucide-react";
 
 type SidebarProps = {
@@ -59,6 +60,24 @@ const menus = [
       {
         label: "Add Product",
         path: "/products/add",
+        icon: Package,
+      },
+    ],
+  },
+  {
+    label: "Quotation",
+    path: "/quotations",
+    icon: Package,
+    children: [
+      {
+        label: "All Quotations",
+        path: "/quotations",
+        icon: List,
+        end: true,
+      },
+      {
+        label: "Add Quotation",
+        path: "/quotations/add",
         icon: Package,
       },
     ],
@@ -189,6 +208,20 @@ export default function Sidebar({
               </div>
             );
           })}
+
+        {/* </nav> */}
+
+
+        {/* Company Info */}
+          <NavLink
+            to="/company"
+            onClick={onClose}
+            className={linkClass}
+          >
+            <Building2 size={20} />
+            Company Info
+          </NavLink>
+
         </nav>
 
         {/* Footer */}

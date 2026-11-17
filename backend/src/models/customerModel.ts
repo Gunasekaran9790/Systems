@@ -46,6 +46,7 @@ export async function createCustomer(data: {
   address_line_2?: string | null;
   city?: string | null;
   state?: string | null;
+  state_code?: string | null;
   zipcode?: string | null;
   country?: string | null;
   tax_number?: string | null;
@@ -68,10 +69,10 @@ export async function createCustomer(data: {
     const [result] = await db.execute(
       `INSERT INTO customers (
         customer_code, name, company_name, phone_1, phone_2,
-        email, address_line_1, address_line_2, city, state,
+        email, address_line_1, address_line_2, city, state, state_code,
         zipcode, country, tax_number, tax_number_type,
         credit_limit, opening_balance, status
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         customerCode,
         data.name,
@@ -83,6 +84,7 @@ export async function createCustomer(data: {
         data.address_line_2 ?? null,
         data.city ?? null,
         data.state ?? null,
+        data.state_code ?? null,
         data.zipcode ?? null,
         data.country ?? null,
         data.tax_number ?? null,
@@ -143,6 +145,7 @@ export async function updateCustomer(id: string, data: any) {
         address_line_2 = ?,
         city = ?,
         state = ?,
+        state_code = ?,
         zipcode = ?,
         country = ?,
         tax_number = ?,
@@ -162,6 +165,7 @@ export async function updateCustomer(id: string, data: any) {
         data.address_line_2 || null,
         data.city || null,
         data.state || null,
+        data.state_code || null,
         data.zipcode || null,
         data.country || null,
         data.tax_number || null,

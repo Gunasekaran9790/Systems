@@ -98,6 +98,10 @@ export const customerSchema = z.object({
     message: 'Please select a valid Indian state or Union Territory',
   }),
 
+  state_code: z.string()
+    .trim()
+    .regex(/^\d{2}$/, 'State code must contain 2 digits'),
+
   zipcode: z.string()
     .trim()
     .refine(

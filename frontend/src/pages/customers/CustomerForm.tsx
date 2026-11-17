@@ -33,6 +33,7 @@ const initialForm: FormValues = {
   address_line_2: '',
   city: '',
   state: '',
+  state_code: '',
   zipcode: '',
   country: 'India',
   tax_number: '',
@@ -53,6 +54,7 @@ const fields = [
   { name: 'address_line_2', label: 'Address Line 2', maxLength: 255, required: true },
   { name: 'city', label: 'City', maxLength: 150, required: true },
   //{ name: 'state', label: 'State', required: true },
+  { name: 'state_code', label: 'State Code', maxLength: 2, required: true },
   { name: 'zipcode', label: 'ZIP Code', maxLength: 6, required: true },
   { name: 'country', label: 'Country', maxLength: 150, required: true },
   { name: 'tax_number', label: 'Tax Number', maxLength: 50, required: true },
@@ -156,6 +158,7 @@ export default function CustomerForm() {
           address_line_2: customer.address_line_2 ?? '',
           city: customer.city ?? '',
           state: customer.state ?? '',
+          state_code: customer.state_code ?? '',
           zipcode: customer.zipcode ?? '',
           country: customer.country ?? '',
           tax_number: customer.tax_number ?? '',
@@ -213,6 +216,15 @@ export default function CustomerForm() {
       setError('Please select a state.');
       return;
     }
+
+    // if (!form.state_code.trim() &&
+    // !/^[0-9]{2}$/.test(form.state_code.trim())
+    // ) {
+    // setError(
+    //     'State code must contain 2 digits.',
+    //   );
+    //   return;
+    // }
 
     // Phone validation
     if (!validatePhone(form.phone_1)) {

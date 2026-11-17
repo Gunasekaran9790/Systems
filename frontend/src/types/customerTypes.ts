@@ -10,6 +10,7 @@ export interface Customer {
   address_line_2: string | null;
   city: string | null;
   state: string | null;
+  state_code: string | null;
   zipcode: string | null;
   country: string | null;
   tax_number: string | null;
@@ -32,6 +33,7 @@ export interface CustomerForm {
   address_line_2?: string;
   city?: string;
   state?: string;
+  state_code?: string;
   zipcode?: string;
   country?: string;
   tax_number?: string;

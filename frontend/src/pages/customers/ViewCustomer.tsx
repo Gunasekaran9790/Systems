@@ -36,6 +36,7 @@ export default function ViewCustomer() {
     ['Address Line 2', customer.address_line_2],
     ['City', customer.city],
     ['State', customer.state],
+    ['State Code', customer.state_code],
     ['ZIP Code', customer.zipcode],
     ['Country', customer.country],
     ['Tax Number', customer.tax_number],

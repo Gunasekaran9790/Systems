@@ -40,6 +40,15 @@ import ProductsList from './pages/products/ProductsList';
 import ProductForm from './pages/products/ProductForm';
 import ViewProduct from './pages/products/ViewProduct';
 
+import CompanyInfo from './pages/comapny/CompanyInfo';
+
+import QuotationList from './pages/quotations/QuotationList';
+import QuotationForm from './pages/quotations/QuotationForm';
+import ViewQuotation from './pages/quotations/ViewQuotation';
+
+
+import SignUp from "./pages/auth/SignUp";
+
 function App() {
   return (
     <BrowserRouter>
@@ -50,6 +59,8 @@ function App() {
           <Route element={<DashboardLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/users" element={<Users />} />
+
+            <Route path="/signup" element={<SignUp />} />
 
             <Route path="/customers" element={<CustomersList />} />
             {/* <Route path="/customers/add" element={<AddCustomer />} /> */}
@@ -62,6 +73,13 @@ function App() {
             <Route path="/products/add" element={<ProductForm />} />
             <Route path="/products/edit/:id" element={<ProductForm />} />
             <Route path="/products/view/:id" element={<ViewProduct />} />
+
+            <Route path="/company" element={<CompanyInfo />} />
+
+            <Route path="/quotations" element={<QuotationList />} />
+            <Route path="/quotations/add" element={<QuotationForm />} />
+            <Route path="/quotations/view/:id" element={<ViewQuotation />} />
+            <Route path="/quotations/edit/:id" element={<QuotationForm />}/>
 
           </Route>
         </Route>

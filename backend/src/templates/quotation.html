@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quotation</title>
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- Company Header -->
+    <header class="company-header">
+
+      <div class="company-logo"> logo here
+        {{LOGO}}
+      </div>
+
+      <div class="company-info">
+        <h1>{{COMPANY_NAME}}</h1>
+        <p>{{COMPANY_ADDRESS}}</p>
+        <p>{{COMPANY_CONTACT}}</p>
+        <p>{{COMPANY_WEBSITE}}</p>
+      </div>
+
+    </header>
+
+    <!-- Quotation Information -->
+    <section class="quotation-heading">
+
+      <div>
+        <h2>QUOTATION</h2>
+        <p class="quotation-subtitle">Quotation Details asasssas</p>
+      </div>
+
+      <div class="quotation-meta">
+        <p><strong>Quotation No:</strong> {{QUOTATION_NO}}</p>
+        <p><strong>Date:</strong> {{QUOTATION_DATE}}</p>
+        <p><strong>Valid Until:</strong> {{VALID_UNTIL}}</p>
+      </div>
+
+    </section>
+
+    <!-- Customer Information -->
+    <section class="customer-box">
+
+      <h3>QUOTATION FOR</h3>
+
+      <h4>{{CUSTOMER_NAME}}</h4>
+
+      <p><strong>Customer Code:</strong> {{CUSTOMER_CODE}}</p>
+      <p><strong>State:</strong> {{CUSTOMER_STATE}}</p>
+      <p><strong>State Code:</strong> {{CUSTOMER_STATE_CODE}}</p>
+
+    </section>
+
+    <!-- Items Table -->
+    <table class="items-table">
+
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Qty</th>
+          <th>Unit</th>
+          <th>Price</th>
+          <th>Discount</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {{ITEM_ROWS}}
+      </tbody>
+
+    </table>
+
+    <!-- Totals -->
+    <section class="totals-section">
+
+      <div class="totals">
+        {{TOTAL_ROWS}}
+      </div>
+
+    </section>
+
+    <!-- Notes -->
+    <section class="notes">
+
+      <h3>Notes / Terms & Conditions</h3>
+      <p>{{NOTES}}</p>
+
+    </section>
+
+    <!-- Bank Details -->
+    <section class="bank-details">
+
+      <h3>Bank Details</h3>
+      <p>{{BANK_DETAILS}}</p>
+
+    </section>
+
+    <!-- Authorised Signatory -->
+    <section class="signature">
+
+      <p>For {{COMPANY_NAME}}</p>
+
+      <br /><br />
+
+      <strong>{{AUTHORISED_SIGNATORY}}</strong>
+
+      <p>Authorised Signatory</p>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      {{FOOTER}}
+    </footer>
+
+  </div>
+
+</body>
+</html>
