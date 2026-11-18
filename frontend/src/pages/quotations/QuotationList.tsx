@@ -256,6 +256,8 @@ const handlePreviewPDF = async (id: number) => {
                         <option value="CANCELLED">CANCELLED</option>
                       </>
                     )}
+
+                    <option value="SENT">SENT</option>
                   </select>
                 </td>
 
@@ -268,7 +270,7 @@ const handlePreviewPDF = async (id: number) => {
                       View
                     </Link>
 
-                    {quotation.status === 'DRAFT' && (
+                    {quotation.status === 'DRAFT' || quotation.status === 'SENT' && (
                       <>
                         <Link
                           to={`/quotations/edit/${quotation.id}`}

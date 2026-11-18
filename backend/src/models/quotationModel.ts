@@ -668,7 +668,7 @@ static async update(id: number, input: QuotationInput) {
       ACCEPTED: [],
       REJECTED: [],
       EXPIRED: [],
-      CANCELLED: [],
+      CANCELLED: ['SENT'],
     };
 
     if (!allowed[current]?.includes(status)) {
